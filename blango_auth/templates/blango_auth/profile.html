@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load blog_extras %}
+{% block title %}Perfil de Blango{% endblock %}
+{% block content %}
+{% row %}
+    {% col %}
+        <p>A iniciado sesión como {{ request.user }}.</p>
+        <p><a href="{% url 'logout' %}">Cerrar sesion</a></p>
+    {% endcol %}
+{% endrow %}
+{% endblock %}

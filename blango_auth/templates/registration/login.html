@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags blog_extras %}
+{% block title %}Log In to Blango{% endblock %}
+{% block content %}
+{% row 'justify-content-center' %}
+    {% col 'col-md-6' %}
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>Su cuenta no tiene acceso a esta página. 
+        Para continuar, por favor inicie sesión con una cuenta que tenga acceso.</p>
+        {% else %}
+        <p>Inicie sesión para ver esta página.</p>
+        {% endif %}
+    {% endif %}
+    {% endcol %}
+{% endrow %}
+{% row 'justify-content-center' %}
+    {% col 'col-md-6' %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form|crispy}}
+            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        <p><a href="{% url 'password_reset' %}">¿Has olvidado tu contraseña?</a></p>
+    {% endcol %}
+{% endrow %}
+
+{% endblock %}
